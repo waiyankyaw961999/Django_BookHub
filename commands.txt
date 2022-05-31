@@ -1,0 +1,7 @@
+# create the project entry for the django on the docker
+docker-compose run django django-admin startproject core .
+
+# migrate the database schema to your docker image
+docker-compose run django python manage.py migrate
+# to check the .env is working properly in docker
+docker-compose --env-file .env config
