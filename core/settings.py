@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "accounts.apps.AccountsConfig",
     "books.apps.BooksConfig",
     "authors.apps.AuthorsConfig",
+    "common.apps.CommonConfig",
     # For CORS
     "corsheaders",
 ]
@@ -128,9 +129,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Yangon"
 
 USE_I18N = True
+
+USE_L10N = True
 
 USE_TZ = True
 

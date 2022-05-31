@@ -11,7 +11,7 @@ class Category(models.Model):
 
     """
 
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, unique=True)
     description = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -28,12 +28,10 @@ class Book(models.Model):
     """
 
     title = models.CharField(max_length=255)
-    author = models.ManyToManyField(Author, on_delete=models.CASCADE)
+    author = models.ManyToManyField(Author)
     published_date = models.DateTimeField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    in_stock = models.BooleanField(default=True)
-    price = models.FloatField()
-    image = models.ImageField(upload_to="images/")
+    cover_image = models.CharField(max_length=255, null=True, blank=True)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

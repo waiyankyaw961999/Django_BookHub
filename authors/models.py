@@ -8,7 +8,7 @@ class Author(models.Model):
     |- id (PK) -|- first_name -|- last_name -|- created_at -|- updated_at -|
     """
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
