@@ -17,7 +17,7 @@ class Category(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"<Category object: {self.name}>"
+        return f"{self.name}"
 
 
 class Book(models.Model):
@@ -37,4 +37,4 @@ class Book(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"<Book object: {self.title}>"
+        return f"{self.title}"
