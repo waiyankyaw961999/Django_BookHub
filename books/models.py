@@ -7,12 +7,13 @@ from authors.models import Author
 class Category(models.Model):
     """
     Category model \n
-    |- id (PK) -|- name -|- description -|- created_at -|- updated_at -|
+    |- id (PK) -|- name -|- description -|-category_image-|- created_at -|- updated_at -|
 
     """
 
     name = models.CharField(max_length=255, unique=True)
     description = models.CharField(max_length=255)
+    category_image = models.ImageField(upload_to="category_images/", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -23,7 +24,7 @@ class Category(models.Model):
 class Book(models.Model):
     """
     Book model \n
-    |- id (PK) -|- name -|- description -|- created_at -|- updated_at -|
+    |- id (PK) -|- title -|- description -|- published_date -|- author -|- category -|- cover_image -|- created_at -|- updated_at -|
 
     """
 
