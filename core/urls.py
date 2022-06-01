@@ -15,8 +15,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
 
-urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("", include("books.urls")),
-]
+
+@api_view(["GET"])
+def api_root(request, format=None):
+    return Response(
+        {
+            "books": reverse("book-list", request=request, format=format),
+            "authors": reverse("author-list", request=request, format=format),
+        }
+    )
+
+
+urlpatterns = format_suffix_patterns(
+    [
+        path("", api_root),
+        path("admin/", admin.site.urls),
+        path("", include("books.urls")),
+        path("", include("authors.urls")),
+    ]
+)

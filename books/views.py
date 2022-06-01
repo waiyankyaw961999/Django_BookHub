@@ -1,23 +1,41 @@
-from rest_framework.response import Response
-from yaml import serialize
-
-from authors.serializers import AuthorSerializer
+from re import purge
+from rest_framework.decorators import api_view
+from rest_framework import renderers
 from .models import Book
-from django.views.decorators.csrf import csrf_exempt
 from .serializers import BookSerializer
 from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
-from authors.serializers import AuthorSerializer
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
 
 # Create your views here.
+from django.db.models import Q
 
 
 class BookList(ListAPIView):
     """
     List all books, or create a new book.
+    @ https://www.django-rest-framework.org/api-guide/filtering/
     """
 
     queryset = Book.objects.all().order_by("-created_at")
     serializer_class = BookSerializer
+    filter_backends = [filters.SearchFilter, DjangoFilterBackend]
+    filterset_fields = ["category", "title", "isbn", "author"]
+
+    # def get_queryset(self):
+    #     name = self.request.query_params.get("name", None)
+    #     isbn = self.request.query_params.get("isbn", None)
+    #     category = self.request.query_params.get("category", None)
+    #     author = self.request.query_params.get("author", None)
+    #     if name:
+    #         return self.queryset.filter(title__icontains=name)
+    #     if isbn:
+    #         return self.queryset.filter(isbn=isbn)
+    #     if category:
+    #         return self.queryset.filter(category=category)
+
+    #     return self.queryset
+
     # Since the default pagination is set in the settings, you don't need to specify it here.
     # pagination_class = PageNumberPagination
 

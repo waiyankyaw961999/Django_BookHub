@@ -3,8 +3,15 @@ from . import views
 
 
 urlpatterns = [
-    path("books/", views.BookList.as_view(), name="books"),
-    path("books/<int:pk>/", views.BookDetail.as_view(), name="book"),
+    path("books/", views.BookList.as_view(), name="book-list"),
+    # Filter books by id, name, isbn, category, author.
+    path("books/<int:pk>/", views.BookDetail.as_view(), name="book-detail"),
+    path("books/<str:name>/", views.BookList.as_view(), name="book-detail"),
+    path("books/<str:isbn>/", views.BookList.as_view(), name="book-detail"),
+    path("books/<str:category>/", views.BookList.as_view(), name="book-detail"),
+    path("books/<str:author>/", views.BookList.as_view(), name="book-detail"),
+    # path("books/<int:pk>/authors/", views.ReviewList.as_view(), name="books-authors"),
+    # path("books/<int:pk>/reviews/", views.ReviewList.as_view(), name="books-reviews"),
 ]
 
 # Crud: Create, Read, Update, Delete
