@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
     # APPS
     "accounts.apps.AccountsConfig",
     "books.apps.BooksConfig",
@@ -47,6 +48,12 @@ INSTALLED_APPS = [
     # For CORS
     "corsheaders",
 ]
+# https://www.django-rest-framework.org/api-guide/pagination/
+REST_FRAMEWORK = {
+    #'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    "DEFAULT_PAGINATION_CLASS": "core.pagination.StandardResultsSetPagination",
+    "PAGE_SIZE": 10,
+}
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
