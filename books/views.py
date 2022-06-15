@@ -1,7 +1,7 @@
 from re import purge
 from rest_framework.decorators import api_view
-from .models import Book, Category, Comment
-from .serializers import BookSerializer, CategorySerializer, CommentSerializer
+from .models import Book, Category
+from .serializers import BookSerializer, CategorySerializer
 from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
@@ -13,9 +13,12 @@ from django.db.models import Q
 
 class BookList(ListAPIView, mixins.CreateModelMixin):
     """
-    List all books, or create a new book.
-    @ https://www.django-rest-framework.org/api-guide/filtering/
+        List all books, or create a new book.
+        @ https://www.django-rest-framework.org/api-guide/filtering/
+    <<<<<<< HEAD
 
+    =======
+    >>>>>>> 88e5a1c9be1240c26d9208f7563a5b870f78eb6d
     """
 
     queryset = Book.objects.all().order_by("-created_at")
