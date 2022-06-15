@@ -41,19 +41,24 @@ class Book(models.Model):
     def __str__(self):
         return f"{self.title}"
 
+    def likes_count(self):
+        return self.likes.all().count()
+
 
 class Like(models.Model):
     """
     Like model \n
     """
 
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    user = models.ForeignKey("accounts.User", on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="likes")
+    user = models.ForeignKey(
+        "accounts.User", on_delete=models.CASCADE, related_name="book_likes"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.book} - {self.user}"
+        return f"{self.book}'s - {self.user}"
 
 
 class Comment(models.Model):
@@ -61,11 +66,13 @@ class Comment(models.Model):
     Comment model \n
     """
 
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
-    user = models.ForeignKey("accounts.User", on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="comments")
+    user = models.ForeignKey(
+        "accounts.User", on_delete=models.CASCADE, related_name="book_comments"
+    )
     comment = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.book} - {self.user}"
+        return f"{self.book}'s - {self.comment}"

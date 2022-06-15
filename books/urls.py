@@ -6,6 +6,7 @@ urlpatterns = [
     path("books/", views.BookList.as_view(), name="book-list"),
     # Filter books by id, name, isbn, category, author.
     path("books/<int:pk>/", views.BookDetail.as_view(), name="book-detail"),
+    path("books/<int:pk>/comments/", views.CommentList.as_view(), name="book-comment"),
     # path("books/<int:pk>/authors/", views.ReviewList.as_view(), name="books-authors"),
     # path("books/<int:pk>/reviews/", views.ReviewList.as_view(), name="books-reviews"),
 ]

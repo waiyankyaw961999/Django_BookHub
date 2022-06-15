@@ -1,6 +1,4 @@
-import random
 from faker import Faker
-import faker.providers
 from accounts.models import User
 from django.contrib.auth.hashers import make_password
 

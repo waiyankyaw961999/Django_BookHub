@@ -35,12 +35,15 @@ class Command(BaseCommand):
             self.style.SUCCESS(f"Number of categories: {checkCategory} created.")
         )
 
+        # UserSeeding
         checkUser = UserSeeding(number_of_users=NUMBER_OF_USERS)
         self.stdout.write(self.style.SUCCESS(f"Number of Users: {checkUser} created."))
 
+        # BookSeeding
         checkBook = BookSeeding(number_of_books=NUMBER_OF_BOOKS)
         self.stdout.write(self.style.SUCCESS(f"Number of Books: {checkBook} created."))
 
+        # AuthorSeeding
         checkAuthor = AuthorSeeding(
             number_of_authors=NUMBER_OF_AUTHORS, number_of_books=NUMBER_OF_BOOKS
         )

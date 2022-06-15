@@ -1,5 +1,20 @@
+from asyncore import read
+from turtle import title
 from rest_framework import serializers
-from .models import Book, Category
+from .models import Book, Category, Comment
+from accounts.serializers import UserSerializer
+
+
+class CommentSerializer(serializers.ModelSerializer):
+
+    user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Comment
+        fields = ["id", "comment", "user", "created_at"]
+
+        def create(self, validated_data):
+            return Comment.objects.create(**validated_data)
 
 
 class BookSerializer(serializers.HyperlinkedModelSerializer):
@@ -7,10 +22,22 @@ class BookSerializer(serializers.HyperlinkedModelSerializer):
     category = serializers.PrimaryKeyRelatedField(
         source="category.name", read_only=True
     )
+    # comments = serializers.HyperlinkedRelatedField(view_name="book-comment", many=True, read_only=True)
+    comments = CommentSerializer(many=True, read_only=True)
 
     class Meta:
         model = Book
-        fields = "__all__"
+        fields = [
+            "title",
+            "category",
+            "author",
+            "isbn",
+            "description",
+            "cover_image",
+            "created_at",
+            "likes_count",
+            "comments",
+        ]
 
     def create(self, validated_data):
         return Book.objects.create(**validated_data)
