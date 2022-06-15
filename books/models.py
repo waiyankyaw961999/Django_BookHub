@@ -40,3 +40,17 @@ class Book(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+
+class Like(models.Model):
+    """
+    Like model \n
+    """
+
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    user = models.ForeignKey("accounts.User", on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.book} - {self.user}"

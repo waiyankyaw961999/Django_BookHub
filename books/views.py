@@ -1,17 +1,17 @@
 from re import purge
 from rest_framework.decorators import api_view
-from rest_framework import renderers
-from .models import Book
-from .serializers import BookSerializer
+from .models import Book, Category
+from .serializers import BookSerializer, CategorySerializer
 from rest_framework.generics import ListAPIView, RetrieveUpdateDestroyAPIView
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from rest_framework import mixins
 
 # Create your views here.
 from django.db.models import Q
 
 
-class BookList(ListAPIView):
+class BookList(ListAPIView, mixins.CreateModelMixin):
     """
     List all books, or create a new book.
     @ https://www.django-rest-framework.org/api-guide/filtering/
@@ -38,6 +38,8 @@ class BookList(ListAPIView):
 
     # Since the default pagination is set in the settings, you don't need to specify it here.
     # pagination_class = PageNumberPagination
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
 class BookDetail(RetrieveUpdateDestroyAPIView):
@@ -66,3 +68,24 @@ class BookDetail(RetrieveUpdateDestroyAPIView):
     #         serializer.save()
     #         return Response(serializer.data)
     #     return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+
+class CategoryList(mixins.CreateModelMixin, ListAPIView):
+    """
+    List all categories, or create a new category.
+    """
+
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+
+class CategoryDetail(RetrieveUpdateDestroyAPIView):
+    """
+    Retrieve, update or delete from rest_framework import mixinsa book instance.
+    """
+
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
