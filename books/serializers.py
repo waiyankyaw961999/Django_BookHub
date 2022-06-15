@@ -1,7 +1,5 @@
 from rest_framework import serializers
-from .models import Book
-from authors.serializers import AuthorSerializer
-from authors.models import Author
+from .models import Book, Category
 
 
 class BookSerializer(serializers.HyperlinkedModelSerializer):
@@ -12,17 +10,7 @@ class BookSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Book
-        fields = [
-            "id",
-            "title",
-            "author",
-            "published_date",
-            "category",
-            "cover_image",
-            "isbn",
-            "description",
-            "created_at",
-        ]
+        fields = "__all__"
 
     def create(self, validated_data):
         return Book.objects.create(**validated_data)
@@ -36,3 +24,12 @@ class BookSerializer(serializers.HyperlinkedModelSerializer):
     #     instance.description = validated_data.get('description',instance.description)
     #     instance.save()
     #     return instance
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = "__all__"
+
+    def create(self, validated_data):
+        return Category.objects.create(**validated_data)
