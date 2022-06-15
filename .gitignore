@@ -1,3 +1,15 @@
 .venv
 .env
-.sqlite3
+djangodb.sqlite3
+*.log
+*.pot
+*.pyc
+__pycache__
+__pycache__/*
+# Python #
+*.py[cod]
+*$py.class
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
