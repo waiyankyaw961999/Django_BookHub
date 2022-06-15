@@ -54,3 +54,18 @@ class Like(models.Model):
 
     def __str__(self):
         return f"{self.book} - {self.user}"
+
+
+class Comment(models.Model):
+    """
+    Comment model \n
+    """
+
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    user = models.ForeignKey("accounts.User", on_delete=models.CASCADE)
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.book} - {self.user}"
