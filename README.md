@@ -10,6 +10,5 @@ As this project is developed in my free time, currently no authenthication and t
 # Who developed this
 
 1. Wai Yan Kyaw
-2. ...
 
 Anyone who interested in developing this project will also be welcomed.
