@@ -1,7 +1,7 @@
 # Django_BookHub
 
 This project is a practising project for learning Django RestFramework using authenthication, serializers and other common tools provided in Django Framework.
-You can browse the documentation through http://waiyan.pythonanywhere.com/
+You can browse the api documentation of this project through http://waiyan.pythonanywhere.com/
 
 # About the current version
 
